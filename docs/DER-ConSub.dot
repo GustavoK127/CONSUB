@@ -1,0 +1,174 @@
+digraph DER_ConSub {
+  graph [rankdir=LR, splines=ortho, nodesep=0.42, ranksep=1.4, pad=0.35, bgcolor="#FFFFFF", fontname="Arial"];
+  node [shape=plain, fontname="Arial"];
+  edge [color="#52616B", penwidth=1.25, fontname="Arial", fontsize=10, fontcolor="#263238"];
+
+  paciente [label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="6" COLOR="#155E75">
+      <TR><TD BGCOLOR="#155E75"><FONT COLOR="white"><B>PACIENTE</B></FONT></TD></TR>
+      <TR><TD ALIGN="LEFT"><B>PK</B> id_paciente</TD></TR>
+      <TR><TD ALIGN="LEFT">cpf (UK)</TD></TR>
+      <TR><TD ALIGN="LEFT">cns (UK, nulo)</TD></TR>
+      <TR><TD ALIGN="LEFT">nome_completo</TD></TR>
+      <TR><TD ALIGN="LEFT">data_nascimento</TD></TR>
+      <TR><TD ALIGN="LEFT">telefone_principal</TD></TR>
+      <TR><TD ALIGN="LEFT">telefone_responsavel (nulo)</TD></TR>
+      <TR><TD ALIGN="LEFT">email (nulo)</TD></TR>
+      <TR><TD ALIGN="LEFT">status</TD></TR>
+      <TR><TD ALIGN="LEFT">criado_em</TD></TR>
+    </TABLE>
+  >];
+
+  cidade [label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="6" COLOR="#475569">
+      <TR><TD BGCOLOR="#475569"><FONT COLOR="white"><B>CIDADE</B></FONT></TD></TR>
+      <TR><TD ALIGN="LEFT"><B>PK</B> id_cidade</TD></TR>
+      <TR><TD ALIGN="LEFT">nome</TD></TR>
+      <TR><TD ALIGN="LEFT">uf</TD></TR>
+      <TR><TD ALIGN="LEFT">codigo_ibge (UK)</TD></TR>
+    </TABLE>
+  >];
+
+  unidade [label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="6" COLOR="#475569">
+      <TR><TD BGCOLOR="#475569"><FONT COLOR="white"><B>UNIDADE_SAUDE</B></FONT></TD></TR>
+      <TR><TD ALIGN="LEFT"><B>PK</B> id_unidade</TD></TR>
+      <TR><TD ALIGN="LEFT"><B>FK</B> id_cidade</TD></TR>
+      <TR><TD ALIGN="LEFT">nome</TD></TR>
+      <TR><TD ALIGN="LEFT">tipo (UBS, UPA, hospital...)</TD></TR>
+      <TR><TD ALIGN="LEFT">cnpj_cnes (UK, nulo)</TD></TR>
+      <TR><TD ALIGN="LEFT">logradouro, numero, complemento</TD></TR>
+      <TR><TD ALIGN="LEFT">cep</TD></TR>
+      <TR><TD ALIGN="LEFT">ativo</TD></TR>
+    </TABLE>
+  >];
+
+  especialidade [label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="6" COLOR="#7C3AED">
+      <TR><TD BGCOLOR="#7C3AED"><FONT COLOR="white"><B>ESPECIALIDADE</B></FONT></TD></TR>
+      <TR><TD ALIGN="LEFT"><B>PK</B> id_especialidade</TD></TR>
+      <TR><TD ALIGN="LEFT">nome (UK)</TD></TR>
+      <TR><TD ALIGN="LEFT">ativa</TD></TR>
+    </TABLE>
+  >];
+
+  profissional [label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="6" COLOR="#7C3AED">
+      <TR><TD BGCOLOR="#7C3AED"><FONT COLOR="white"><B>PROFISSIONAL_SAUDE</B></FONT></TD></TR>
+      <TR><TD ALIGN="LEFT"><B>PK</B> id_profissional</TD></TR>
+      <TR><TD ALIGN="LEFT">nome</TD></TR>
+      <TR><TD ALIGN="LEFT">conselho (CRM/CRP...)</TD></TR>
+      <TR><TD ALIGN="LEFT">numero_registro</TD></TR>
+      <TR><TD ALIGN="LEFT">ativo</TD></TR>
+    </TABLE>
+  >];
+
+  profissional_especialidade [label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="6" COLOR="#7C3AED">
+      <TR><TD BGCOLOR="#7C3AED"><FONT COLOR="white"><B>PROFISSIONAL_ESPECIALIDADE</B></FONT></TD></TR>
+      <TR><TD ALIGN="LEFT"><B>PK/FK</B> id_profissional</TD></TR>
+      <TR><TD ALIGN="LEFT"><B>PK/FK</B> id_especialidade</TD></TR>
+    </TABLE>
+  >];
+
+  fila [label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="6" COLOR="#0F766E">
+      <TR><TD BGCOLOR="#0F766E"><FONT COLOR="white"><B>INSCRICAO_FILA</B></FONT></TD></TR>
+      <TR><TD ALIGN="LEFT"><B>PK</B> id_inscricao</TD></TR>
+      <TR><TD ALIGN="LEFT"><B>FK</B> id_paciente</TD></TR>
+      <TR><TD ALIGN="LEFT"><B>FK</B> id_especialidade</TD></TR>
+      <TR><TD ALIGN="LEFT"><B>FK</B> id_cidade</TD></TR>
+      <TR><TD ALIGN="LEFT"><B>FK</B> id_unidade_referencia (nulo)</TD></TR>
+      <TR><TD ALIGN="LEFT">nivel_urgencia</TD></TR>
+      <TR><TD ALIGN="LEFT">descricao_necessidade (nulo)</TD></TR>
+      <TR><TD ALIGN="LEFT">pontuacao_prioridade</TD></TR>
+      <TR><TD ALIGN="LEFT">status (ativa/suspensa/encerrada)</TD></TR>
+      <TR><TD ALIGN="LEFT">aceite_lgpd_em</TD></TR>
+      <TR><TD ALIGN="LEFT">criada_em</TD></TR>
+    </TABLE>
+  >];
+
+  consulta [label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="6" COLOR="#B45309">
+      <TR><TD BGCOLOR="#B45309"><FONT COLOR="white"><B>CONSULTA</B></FONT></TD></TR>
+      <TR><TD ALIGN="LEFT"><B>PK</B> id_consulta</TD></TR>
+      <TR><TD ALIGN="LEFT"><B>FK</B> id_unidade</TD></TR>
+      <TR><TD ALIGN="LEFT"><B>FK</B> id_profissional</TD></TR>
+      <TR><TD ALIGN="LEFT"><B>FK</B> id_especialidade</TD></TR>
+      <TR><TD ALIGN="LEFT">inicio_em, fim_em</TD></TR>
+      <TR><TD ALIGN="LEFT">quantidade_total</TD></TR>
+      <TR><TD ALIGN="LEFT">quantidade_disponivel</TD></TR>
+      <TR><TD ALIGN="LEFT">status (aberta/cancelada/finalizada)</TD></TR>
+      <TR><TD ALIGN="LEFT">criada_em</TD></TR>
+    </TABLE>
+  >];
+
+  vaga [label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="6" COLOR="#B45309">
+      <TR><TD BGCOLOR="#B45309"><FONT COLOR="white"><B>VAGA</B></FONT></TD></TR>
+      <TR><TD ALIGN="LEFT"><B>PK</B> id_vaga</TD></TR>
+      <TR><TD ALIGN="LEFT"><B>FK</B> id_consulta</TD></TR>
+      <TR><TD ALIGN="LEFT">origem (cancelamento/liberacao)</TD></TR>
+      <TR><TD ALIGN="LEFT">aberta_em</TD></TR>
+      <TR><TD ALIGN="LEFT">status (disponivel/reservada/ocupada/expirada)</TD></TR>
+    </TABLE>
+  >];
+
+  oferta [label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="6" COLOR="#B91C1C">
+      <TR><TD BGCOLOR="#B91C1C"><FONT COLOR="white"><B>OFERTA_VAGA</B></FONT></TD></TR>
+      <TR><TD ALIGN="LEFT"><B>PK</B> id_oferta</TD></TR>
+      <TR><TD ALIGN="LEFT"><B>FK</B> id_vaga</TD></TR>
+      <TR><TD ALIGN="LEFT"><B>FK</B> id_inscricao</TD></TR>
+      <TR><TD ALIGN="LEFT">ordem_chamada</TD></TR>
+      <TR><TD ALIGN="LEFT">ofertada_em, expira_em</TD></TR>
+      <TR><TD ALIGN="LEFT">respondida_em (nulo)</TD></TR>
+      <TR><TD ALIGN="LEFT">status (pendente/aceita/recusada/expirada)</TD></TR>
+    </TABLE>
+  >];
+
+  notificacao [label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="6" COLOR="#B91C1C">
+      <TR><TD BGCOLOR="#B91C1C"><FONT COLOR="white"><B>NOTIFICACAO</B></FONT></TD></TR>
+      <TR><TD ALIGN="LEFT"><B>PK</B> id_notificacao</TD></TR>
+      <TR><TD ALIGN="LEFT"><B>FK</B> id_oferta</TD></TR>
+      <TR><TD ALIGN="LEFT">canal (SMS/ligacao)</TD></TR>
+      <TR><TD ALIGN="LEFT">destinatario</TD></TR>
+      <TR><TD ALIGN="LEFT">enviada_em</TD></TR>
+      <TR><TD ALIGN="LEFT">status_entrega</TD></TR>
+    </TABLE>
+  >];
+
+  agendamento [label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="6" COLOR="#B91C1C">
+      <TR><TD BGCOLOR="#B91C1C"><FONT COLOR="white"><B>AGENDAMENTO</B></FONT></TD></TR>
+      <TR><TD ALIGN="LEFT"><B>PK</B> id_agendamento</TD></TR>
+      <TR><TD ALIGN="LEFT"><B>FK/UK</B> id_oferta</TD></TR>
+      <TR><TD ALIGN="LEFT"><B>FK</B> id_paciente</TD></TR>
+      <TR><TD ALIGN="LEFT"><B>FK</B> id_consulta</TD></TR>
+      <TR><TD ALIGN="LEFT">confirmado_em</TD></TR>
+      <TR><TD ALIGN="LEFT">status (confirmado/cancelado/falta/compareceu)</TD></TR>
+      <TR><TD ALIGN="LEFT">cancelado_em (nulo)</TD></TR>
+      <TR><TD ALIGN="LEFT">motivo_cancelamento (nulo)</TD></TR>
+      <TR><TD ALIGN="LEFT">registrado_em</TD></TR>
+    </TABLE>
+  >];
+
+  paciente -> fila [dir=both, arrowtail=teetee, arrowhead=crow, label=" 1 : N"];
+  cidade -> unidade [dir=both, arrowtail=teetee, arrowhead=crow, label=" 1 : N"];
+  cidade -> fila [dir=both, arrowtail=teetee, arrowhead=crow, label=" 1 : N"];
+  unidade -> fila [dir=both, arrowtail=teeteeodot, arrowhead=crow, label=" 0..1 : N"];
+  profissional -> profissional_especialidade [dir=both, arrowtail=teetee, arrowhead=crow, label=" 1 : N"];
+  especialidade -> profissional_especialidade [dir=both, arrowtail=teetee, arrowhead=crow, label=" 1 : N"];
+  especialidade -> fila [dir=both, arrowtail=teetee, arrowhead=crow, label=" 1 : N"];
+  unidade -> consulta [dir=both, arrowtail=teetee, arrowhead=crow, label=" 1 : N"];
+  profissional -> consulta [dir=both, arrowtail=teetee, arrowhead=crow, label=" 1 : N"];
+  especialidade -> consulta [dir=both, arrowtail=teetee, arrowhead=crow, label=" 1 : N"];
+  consulta -> vaga [dir=both, arrowtail=teetee, arrowhead=crow, label=" 1 : N"];
+  vaga -> oferta [dir=both, arrowtail=teetee, arrowhead=crow, label=" 1 : N"];
+  fila -> oferta [dir=both, arrowtail=teetee, arrowhead=crow, label=" 1 : N"];
+  oferta -> notificacao [dir=both, arrowtail=teetee, arrowhead=crow, label=" 1 : N"];
+  oferta -> agendamento [dir=both, arrowtail=teetee, arrowhead=teeodot, label=" 0..1 : 1"];
+  paciente -> agendamento [dir=both, arrowtail=teetee, arrowhead=crow, label=" 1 : N"];
+  consulta -> agendamento [dir=both, arrowtail=teetee, arrowhead=crow, label=" 1 : N"];
+}

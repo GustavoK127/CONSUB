@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="3600" height="2100" viewBox="0 0 3600 2100" role="img" aria-labelledby="title desc">
+  <title id="title">Diagrama Entidade-Relacionamento do ConSub</title>
+  <desc id="desc">Modelo de dados para fila de consultas SUS, vagas, ofertas, notificações e agendamentos.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0,0 L12,6 L0,12 z" fill="#475569"/></marker>
+    <style>
+      text{font-family:Arial,Helvetica,sans-serif;fill:#17212b}.title{font-size:42px;font-weight:700}.subtitle{font-size:21px;fill:#52616b}.rel{font-size:18px;font-weight:700;fill:#475569}.box{fill:#fff;stroke-width:3}.field{font-size:19px}.head{font-size:23px;font-weight:700;fill:#fff}.note{font-size:17px;fill:#475569}.line{stroke:#64748b;stroke-width:3;fill:none;marker-end:url(#arrow)}.soft{stroke:#94a3b8;stroke-width:2;fill:none;stroke-dasharray:8 6;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <rect width="3600" height="2100" fill="#f8fafc"/>
+  <text x="80" y="70" class="title">ConSub — Diagrama Entidade-Relacionamento (DER)</text>
+  <text x="80" y="108" class="subtitle">PK = chave primária · FK = chave estrangeira · UK = chave única · campos “nulo” são opcionais</text>
+
+  <!-- RELACIONAMENTOS, desenhados antes das entidades -->
+  <path class="line" d="M455 300 H510"/><text class="rel" x="455" y="285">1 : N</text>
+  <path class="line" d="M450 370 H1230 V1030 H1350"/><text class="rel" x="760" y="355">1 : N</text>
+  <path class="line" d="M455 1280 H1350"/><text class="rel" x="850" y="1260">1 : N</text>
+  <path class="line" d="M455 1040 H1160 V1055 H1350"/><text class="rel" x="900" y="1020">1 : N</text>
+  <path class="soft" d="M895 405 V800 H1350"/><text class="rel" x="1000" y="780">0..1 : N</text>
+  <path class="line" d="M895 330 H1510 V315 H1630"/><text class="rel" x="1170" y="300">1 : N</text>
+  <path class="line" d="M895 1300 H1220 V455 H1630"/><text class="rel" x="1200" y="440">1 : N</text>
+  <path class="line" d="M890 965 H1060 V1260 H930"/><text class="rel" x="960" y="945">1 : N</text>
+  <path class="line" d="M890 1435 H1060 V1330 H930"/><text class="rel" x="960" y="1415">1 : N</text>
+  <path class="line" d="M1280 1260 H1350"/><text class="rel" x="1270" y="1240">N : 1</text>
+  <path class="line" d="M1510 1090 H1535 V505 H1630"/><text class="rel" x="1515" y="1080">N : 1</text>
+  <path class="line" d="M2010 405 H2220"/><text class="rel" x="2100" y="385">1 : N</text>
+  <path class="line" d="M2580 405 H2690"/><text class="rel" x="2600" y="385">1 : N</text>
+  <path class="line" d="M1960 730 H2420 V1000 H2690"/><text class="rel" x="2280" y="980">1 : N</text>
+  <path class="line" d="M1960 1150 H2690"/><text class="rel" x="2280" y="1130">1 : N</text>
+  <path class="line" d="M3050 360 H3190"/><text class="rel" x="3070" y="340">1 : N</text>
+  <path class="soft" d="M3050 520 H3120 V1050 H3190"/><text class="rel" x="3070" y="1030">0..1 : 1</text>
+  <path class="line" d="M455 1470 H3020 V1160 H3190"/><text class="rel" x="1830" y="1450">1 : N</text>
+  <path class="line" d="M2010 590 H2980 V1190 H3190"/><text class="rel" x="2550" y="570">1 : N</text>
+
+  <!-- CIDADE -->
+  <g transform="translate(80 180)"><rect class="box" width="375" height="205" rx="10" stroke="#475569"/><path d="M0 48H375" stroke="#475569" stroke-width="3"/><rect width="375" height="48" rx="8" fill="#475569"/><text x="187" y="31" text-anchor="middle" class="head">CIDADE</text><text x="16" y="82" class="field"><tspan font-weight="700">PK</tspan> id_cidade</text><text x="16" y="116" class="field">nome</text><text x="16" y="150" class="field">uf</text><text x="16" y="184" class="field">codigo_ibge (UK)</text></g>
+  <!-- UNIDADE -->
+  <g transform="translate(510 180)"><rect class="box" width="385" height="305" rx="10" stroke="#475569"/><path d="M0 48H385" stroke="#475569" stroke-width="3"/><rect width="385" height="48" rx="8" fill="#475569"/><text x="192" y="31" text-anchor="middle" class="head">UNIDADE_SAUDE</text><text x="16" y="82" class="field"><tspan font-weight="700">PK</tspan> id_unidade</text><text x="16" y="116" class="field"><tspan font-weight="700">FK</tspan> id_cidade</text><text x="16" y="150" class="field">nome</text><text x="16" y="184" class="field">tipo (UBS, UPA, hospital...)</text><text x="16" y="218" class="field">cnpj_cnes (UK, nulo)</text><text x="16" y="252" class="field">logradouro, numero, complemento</text><text x="16" y="286" class="field">cep · ativo</text></g>
+  <!-- PACIENTE -->
+  <g transform="translate(80 910)"><rect class="box" width="375" height="395" rx="10" stroke="#155e75"/><path d="M0 48H375" stroke="#155e75" stroke-width="3"/><rect width="375" height="48" rx="8" fill="#155e75"/><text x="187" y="31" text-anchor="middle" class="head">PACIENTE</text><text x="16" y="82" class="field"><tspan font-weight="700">PK</tspan> id_paciente</text><text x="16" y="116" class="field">cpf (UK)</text><text x="16" y="150" class="field">cns (UK, nulo)</text><text x="16" y="184" class="field">nome_completo</text><text x="16" y="218" class="field">data_nascimento</text><text x="16" y="252" class="field">telefone_principal</text><text x="16" y="286" class="field">telefone_responsavel (nulo)</text><text x="16" y="320" class="field">email (nulo)</text><text x="16" y="354" class="field">status</text><text x="16" y="388" class="field">criado_em</text></g>
+  <!-- ESPECIALIDADE -->
+  <g transform="translate(510 850)"><rect class="box" width="380" height="150" rx="10" stroke="#7c3aed"/><path d="M0 48H380" stroke="#7c3aed" stroke-width="3"/><rect width="380" height="48" rx="8" fill="#7c3aed"/><text x="190" y="31" text-anchor="middle" class="head">ESPECIALIDADE</text><text x="16" y="82" class="field"><tspan font-weight="700">PK</tspan> id_especialidade</text><text x="16" y="116" class="field">nome (UK) · ativa</text></g>
+  <!-- PROFISSIONAL -->
+  <g transform="translate(510 1300)"><rect class="box" width="380" height="220" rx="10" stroke="#7c3aed"/><path d="M0 48H380" stroke="#7c3aed" stroke-width="3"/><rect width="380" height="48" rx="8" fill="#7c3aed"/><text x="190" y="31" text-anchor="middle" class="head">PROFISSIONAL_SAUDE</text><text x="16" y="82" class="field"><tspan font-weight="700">PK</tspan> id_profissional</text><text x="16" y="116" class="field">nome</text><text x="16" y="150" class="field">conselho (CRM/CRP...)</text><text x="16" y="184" class="field">numero_registro · ativo</text></g>
+  <!-- PROFISSIONAL_ESPECIALIDADE -->
+  <g transform="translate(930 1160)"><rect class="box" width="350" height="135" rx="10" stroke="#7c3aed"/><path d="M0 48H350" stroke="#7c3aed" stroke-width="3"/><rect width="350" height="48" rx="8" fill="#7c3aed"/><text x="175" y="31" text-anchor="middle" class="head">PROFISSIONAL_ESPECIALIDADE</text><text x="16" y="82" class="field"><tspan font-weight="700">PK/FK</tspan> id_profissional</text><text x="16" y="116" class="field"><tspan font-weight="700">PK/FK</tspan> id_especialidade</text></g>
+  <!-- INSCRICAO -->
+  <g transform="translate(1350 760)"><rect class="box" width="460" height="440" rx="10" stroke="#0f766e"/><path d="M0 48H460" stroke="#0f766e" stroke-width="3"/><rect width="460" height="48" rx="8" fill="#0f766e"/><text x="230" y="31" text-anchor="middle" class="head">INSCRICAO_FILA</text><text x="16" y="82" class="field"><tspan font-weight="700">PK</tspan> id_inscricao</text><text x="16" y="116" class="field"><tspan font-weight="700">FK</tspan> id_paciente</text><text x="16" y="150" class="field"><tspan font-weight="700">FK</tspan> id_especialidade</text><text x="16" y="184" class="field"><tspan font-weight="700">FK</tspan> id_cidade</text><text x="16" y="218" class="field"><tspan font-weight="700">FK</tspan> id_unidade_referencia (nulo)</text><text x="16" y="252" class="field">nivel_urgencia</text><text x="16" y="286" class="field">descricao_necessidade (nulo)</text><text x="16" y="320" class="field">pontuacao_prioridade</text><text x="16" y="354" class="field">status (ativa/suspensa/encerrada)</text><text x="16" y="388" class="field">aceite_lgpd_em</text><text x="16" y="422" class="field">criada_em</text></g>
+  <!-- CONSULTA -->
+  <g transform="translate(1630 180)"><rect class="box" width="380" height="355" rx="10" stroke="#b45309"/><path d="M0 48H380" stroke="#b45309" stroke-width="3"/><rect width="380" height="48" rx="8" fill="#b45309"/><text x="190" y="31" text-anchor="middle" class="head">CONSULTA</text><text x="16" y="82" class="field"><tspan font-weight="700">PK</tspan> id_consulta</text><text x="16" y="116" class="field"><tspan font-weight="700">FK</tspan> id_unidade</text><text x="16" y="150" class="field"><tspan font-weight="700">FK</tspan> id_profissional</text><text x="16" y="184" class="field"><tspan font-weight="700">FK</tspan> id_especialidade</text><text x="16" y="218" class="field">inicio_em · fim_em</text><text x="16" y="252" class="field">quantidade_total</text><text x="16" y="286" class="field">quantidade_disponivel</text><text x="16" y="320" class="field">status (aberta/cancelada/finalizada)</text><text x="16" y="354" class="field">criada_em</text></g>
+  <!-- VAGA -->
+  <g transform="translate(2220 250)"><rect class="box" width="360" height="220" rx="10" stroke="#b45309"/><path d="M0 48H360" stroke="#b45309" stroke-width="3"/><rect width="360" height="48" rx="8" fill="#b45309"/><text x="180" y="31" text-anchor="middle" class="head">VAGA</text><text x="16" y="82" class="field"><tspan font-weight="700">PK</tspan> id_vaga</text><text x="16" y="116" class="field"><tspan font-weight="700">FK</tspan> id_consulta</text><text x="16" y="150" class="field">origem (cancelamento/liberacao)</text><text x="16" y="184" class="field">aberta_em</text><text x="16" y="218" class="field">status (disp./reserv./ocup./exp.)</text></g>
+  <!-- OFERTA -->
+  <g transform="translate(2690 200)"><rect class="box" width="360" height="290" rx="10" stroke="#b91c1c"/><path d="M0 48H360" stroke="#b91c1c" stroke-width="3"/><rect width="360" height="48" rx="8" fill="#b91c1c"/><text x="180" y="31" text-anchor="middle" class="head">OFERTA_VAGA</text><text x="16" y="82" class="field"><tspan font-weight="700">PK</tspan> id_oferta</text><text x="16" y="116" class="field"><tspan font-weight="700">FK</tspan> id_vaga</text><text x="16" y="150" class="field"><tspan font-weight="700">FK</tspan> id_inscricao</text><text x="16" y="184" class="field">ordem_chamada</text><text x="16" y="218" class="field">ofertada_em · expira_em</text><text x="16" y="252" class="field">respondida_em (nulo)</text><text x="16" y="286" class="field">status (pend./aceita/rec./exp.)</text></g>
+  <!-- NOTIFICACAO -->
+  <g transform="translate(3190 180)"><rect class="box" width="330" height="220" rx="10" stroke="#b91c1c"/><path d="M0 48H330" stroke="#b91c1c" stroke-width="3"/><rect width="330" height="48" rx="8" fill="#b91c1c"/><text x="165" y="31" text-anchor="middle" class="head">NOTIFICACAO</text><text x="16" y="82" class="field"><tspan font-weight="700">PK</tspan> id_notificacao</text><text x="16" y="116" class="field"><tspan font-weight="700">FK</tspan> id_oferta</text><text x="16" y="150" class="field">canal (SMS/ligacao)</text><text x="16" y="184" class="field">destinatario · enviada_em</text><text x="16" y="218" class="field">status_entrega</text></g>
+  <!-- AGENDAMENTO -->
+  <g transform="translate(3190 1000)"><rect class="box" width="360" height="325" rx="10" stroke="#b91c1c"/><path d="M0 48H360" stroke="#b91c1c" stroke-width="3"/><rect width="360" height="48" rx="8" fill="#b91c1c"/><text x="180" y="31" text-anchor="middle" class="head">AGENDAMENTO</text><text x="16" y="82" class="field"><tspan font-weight="700">PK</tspan> id_agendamento</text><text x="16" y="116" class="field"><tspan font-weight="700">FK/UK</tspan> id_oferta</text><text x="16" y="150" class="field"><tspan font-weight="700">FK</tspan> id_paciente</text><text x="16" y="184" class="field"><tspan font-weight="700">FK</tspan> id_consulta</text><text x="16" y="218" class="field">confirmado_em</text><text x="16" y="252" class="field">status (conf./cancel./falta/comp.)</text><text x="16" y="286" class="field">cancelado_em · motivo (nulo)</text><text x="16" y="320" class="field">registrado_em</text></g>
+
+  <rect x="80" y="1760" width="3440" height="200" rx="12" fill="#ecfeff" stroke="#0e7490" stroke-width="2"/>
+  <text x="110" y="1802" class="title" style="font-size:26px;fill:#155e75">Regras representadas pelo modelo</text>
+  <text x="110" y="1840" class="note">1. Paciente pode ter várias inscrições, mas uma por especialidade/localidade ativa.  2. A ordem de oferta vem da pontuação de prioridade e data da inscrição.</text>
+  <text x="110" y="1875" class="note">3. Oferta expira em 2 horas e gera no máximo um agendamento.  4. Cancelamento do agendamento libera nova vaga; faltas permitem suspensão da inscrição.</text>
+  <text x="110" y="1910" class="note">5. Profissional só pode ser associado a consulta de especialidade que atende.  6. A vaga, oferta e notificação preservam o histórico de chamadas e tentativas de contato.</text>
+</svg>
