@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Consultas Disponíveis — ConSub</title>
-<meta name="description" content="Vagas de consultas do SUS que surgiram por cancelamento, atualizadas em tempo real.">
+<title>Consultas de Demonstração — ConSub</title>
+<meta name="description" content="Exemplos fictícios de consultas e solicitação de transporte no protótipo ConSub.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
@@ -37,9 +37,10 @@
 <main id="main">
 
   <section class="page-hero">
-    <h1>Consultas Disponíveis Agora</h1>
-    <p>Vagas que surgiram por cancelamento. Atualizado em tempo real.</p>
-    <span class="badge"><span class="dot"></span>9 vagas disponíveis hoje</span>
+    <h1>Consultas de Demonstração</h1>
+    <p>Exemplos fictícios para apresentar a busca e o fluxo de solicitação.</p>
+    <span class="badge"><span class="dot"></span>9 consultas de exemplo</span>
+    <p class="demo-notice">Esta lista não representa vagas reais nem disponibilidade atual do SUS. Todas as consultas, datas, profissionais e unidades são dados fictícios.</p>
   </section>
 
   <section class="filters-bar">
@@ -85,7 +86,7 @@
       <div class="consultas-grid">
 
         <!-- Cardiologia -->
-        <article class="consulta-card" data-specialty="cardiologia" data-city="sao-paulo" data-search="cardiologia dr. roberto mendes são paulo ubs central">
+        <article class="consulta-card" data-specialty="cardiologia" data-city="sao-paulo" data-demo-date="2026-03-07" data-search="cardiologia dr. roberto mendes são paulo ubs central">
           <div class="consulta-card-head"><h3>Cardiologia</h3><span class="pill vagas-2">2 vagas</span></div>
           <div class="consulta-info">
             <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M6 21v-1a6 6 0 0 1 12 0v1"/></svg>Dr. Roberto Mendes</div>
@@ -94,11 +95,11 @@
             <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>UBS Central – Rua das Flores, 120, São Paulo — SP</div>
           </div>
           <span class="tag tag-none">Sem restrição</span>
-          <button class="btn-vaga"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>Quero esta Vaga</button>
+          <button class="btn-vaga"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>Solicitar consulta (simulação)</button>
         </article>
 
         <!-- Ortopedia -->
-        <article class="consulta-card" data-specialty="ortopedia" data-city="ribeirao-preto" data-search="ortopedia dra. fernanda costa ribeirão preto hospital municipal">
+        <article class="consulta-card" data-specialty="ortopedia" data-city="ribeirao-preto" data-demo-date="2026-03-07" data-search="ortopedia dra. fernanda costa ribeirão preto hospital municipal">
           <div class="consulta-card-head"><h3>Ortopedia</h3><span class="pill vagas-1">1 vaga</span></div>
           <div class="consulta-info">
             <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M6 21v-1a6 6 0 0 1 12 0v1"/></svg>Dra. Fernanda Costa</div>
@@ -107,11 +108,11 @@
             <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Hospital Municipal – Av. Brasil, 450, Ribeirão Preto — SP</div>
           </div>
           <span class="tag tag-none">Sem restrição</span>
-          <button class="btn-vaga"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>Quero esta Vaga</button>
+          <button class="btn-vaga"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>Solicitar consulta (simulação)</button>
         </article>
 
         <!-- Neurologia -->
-        <article class="consulta-card" data-specialty="neurologia" data-city="fortaleza" data-search="neurologia dr. paulo almeida fortaleza upa norte">
+        <article class="consulta-card" data-specialty="neurologia" data-city="fortaleza" data-demo-date="2026-03-09" data-search="neurologia dr. paulo almeida fortaleza upa norte">
           <div class="consulta-card-head"><h3>Neurologia</h3><span class="pill vagas-1">1 vaga</span></div>
           <div class="consulta-info">
             <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M6 21v-1a6 6 0 0 1 12 0v1"/></svg>Dr. Paulo Almeida</div>
@@ -120,11 +121,11 @@
             <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>UPA Norte – Rua do Ipê, 88, Fortaleza — CE</div>
           </div>
           <span class="tag tag-mod">Urgência moderada</span>
-          <button class="btn-vaga"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>Quero esta Vaga</button>
+          <button class="btn-vaga"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>Solicitar consulta (simulação)</button>
         </article>
 
         <!-- Ginecologia -->
-        <article class="consulta-card" data-specialty="ginecologia" data-city="recife" data-search="ginecologia dra. luisa ramos recife ubs leste">
+        <article class="consulta-card" data-specialty="ginecologia" data-city="recife" data-demo-date="2026-03-10" data-search="ginecologia dra. luisa ramos recife ubs leste">
           <div class="consulta-card-head"><h3>Ginecologia</h3><span class="pill vagas-3">3 vagas</span></div>
           <div class="consulta-info">
             <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M6 21v-1a6 6 0 0 1 12 0v1"/></svg>Dra. Luisa Ramos</div>
@@ -133,11 +134,11 @@
             <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>UBS Leste – Trav. da Saúde, 33, Recife — PE</div>
           </div>
           <span class="tag tag-none">Sem restrição</span>
-          <button class="btn-vaga"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>Quero esta Vaga</button>
+          <button class="btn-vaga"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>Solicitar consulta (simulação)</button>
         </article>
 
         <!-- Dermatologia -->
-        <article class="consulta-card" data-specialty="dermatologia" data-city="goiania" data-search="dermatologia dr. thiago figueiredo goiânia centro de especialidades">
+        <article class="consulta-card" data-specialty="dermatologia" data-city="goiania" data-demo-date="2026-03-11" data-search="dermatologia dr. thiago figueiredo goiânia centro de especialidades">
           <div class="consulta-card-head"><h3>Dermatologia</h3><span class="pill vagas-2">2 vagas</span></div>
           <div class="consulta-info">
             <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M6 21v-1a6 6 0 0 1 12 0v1"/></svg>Dr. Thiago Figueiredo</div>
@@ -146,11 +147,11 @@
             <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Centro de Especialidades – Av. Goiás, 200, Goiânia — GO</div>
           </div>
           <span class="tag tag-none">Sem restrição</span>
-          <button class="btn-vaga"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>Quero esta Vaga</button>
+          <button class="btn-vaga"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>Solicitar consulta (simulação)</button>
         </article>
 
         <!-- Psicologia -->
-        <article class="consulta-card" data-specialty="psicologia" data-city="belo-horizonte" data-search="psicologia psic. ana carolina lima belo horizonte caps">
+        <article class="consulta-card" data-specialty="psicologia" data-city="belo-horizonte" data-demo-date="2026-03-12" data-search="psicologia psic. ana carolina lima belo horizonte caps">
           <div class="consulta-card-head"><h3>Psicologia</h3><span class="pill vagas-1">1 vaga</span></div>
           <div class="consulta-info">
             <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M6 21v-1a6 6 0 0 1 12 0v1"/></svg>Psic. Ana Carolina Lima</div>
@@ -159,11 +160,11 @@
             <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>CAPS – Rua Esperança, 77, Belo Horizonte — MG</div>
           </div>
           <span class="tag tag-none">Sem restrição</span>
-          <button class="btn-vaga"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>Quero esta Vaga</button>
+          <button class="btn-vaga"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>Solicitar consulta (simulação)</button>
         </article>
 
         <!-- Oftalmologia -->
-        <article class="consulta-card" data-specialty="oftalmologia" data-city="curitiba" data-search="oftalmologia dr. sérgio nunes curitiba ubs sul">
+        <article class="consulta-card" data-specialty="oftalmologia" data-city="curitiba" data-demo-date="2026-03-13" data-search="oftalmologia dr. sérgio nunes curitiba ubs sul">
           <div class="consulta-card-head"><h3>Oftalmologia</h3><span class="pill vagas-2">2 vagas</span></div>
           <div class="consulta-info">
             <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M6 21v-1a6 6 0 0 1 12 0v1"/></svg>Dr. Sérgio Nunes</div>
@@ -172,11 +173,11 @@
             <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>UBS Sul – Rua das Palmeiras, 5, Curitiba — PR</div>
           </div>
           <span class="tag tag-none">Sem restrição</span>
-          <button class="btn-vaga"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>Quero esta Vaga</button>
+          <button class="btn-vaga"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>Solicitar consulta (simulação)</button>
         </article>
 
         <!-- Endocrinologia -->
-        <article class="consulta-card" data-specialty="endocrinologia" data-city="salvador" data-search="endocrinologia dra. beatriz souza salvador hospital regional">
+        <article class="consulta-card" data-specialty="endocrinologia" data-city="salvador" data-demo-date="2026-03-14" data-search="endocrinologia dra. beatriz souza salvador hospital regional">
           <div class="consulta-card-head"><h3>Endocrinologia</h3><span class="pill vagas-1">1 vaga</span></div>
           <div class="consulta-info">
             <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M6 21v-1a6 6 0 0 1 12 0v1"/></svg>Dra. Beatriz Souza</div>
@@ -185,11 +186,11 @@
             <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Hospital Regional – Av. Médicos, 300, Salvador — BA</div>
           </div>
           <span class="tag tag-mod">Urgência moderada</span>
-          <button class="btn-vaga"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>Quero esta Vaga</button>
+          <button class="btn-vaga"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>Solicitar consulta (simulação)</button>
         </article>
 
         <!-- Clínico Geral -->
-        <article class="consulta-card" data-specialty="clinico-geral" data-city="porto-alegre" data-search="clínico geral clinico geral dr. josé ferreira porto alegre ubs central">
+        <article class="consulta-card" data-specialty="clinico-geral" data-city="porto-alegre" data-demo-date="2026-03-07" data-search="clínico geral clinico geral dr. josé ferreira porto alegre ubs central">
           <div class="consulta-card-head"><h3>Clínico Geral</h3><span class="pill vagas-4">4 vagas</span></div>
           <div class="consulta-info">
             <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M6 21v-1a6 6 0 0 1 12 0v1"/></svg>Dr. José Ferreira</div>
@@ -198,7 +199,7 @@
             <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>UBS Central – Rua das Acácias, 50, Porto Alegre — RS</div>
           </div>
           <span class="tag tag-none">Sem restrição</span>
-          <button class="btn-vaga"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>Quero esta Vaga</button>
+          <button class="btn-vaga"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>Solicitar consulta (simulação)</button>
         </article>
 
       </div>
@@ -218,6 +219,73 @@
 
     </div>
   </section>
+
+  <dialog class="demo-dialog" id="vaga-demo-dialog" aria-labelledby="vaga-demo-title">
+    <div class="demo-dialog-head">
+      <div>
+        <p class="eyebrow">Fluxo demonstrativo</p>
+        <h2 id="vaga-demo-title">Solicitação de consulta</h2>
+      </div>
+      <button class="btn-secondary" type="button" id="close-vaga-dialog">Fechar</button>
+    </div>
+    <p id="vaga-demo-summary" class="demo-notice"></p>
+    <p class="demo-copy">Esta ação não reserva uma consulta. Você pode simular, de forma opcional, uma solicitação de transporte municipal.</p>
+
+    <form id="vaga-demo-form" novalidate>
+      <fieldset class="demo-fieldset">
+        <legend>Transporte municipal em van (opcional)</legend>
+        <label class="demo-checkbox" for="request-transport">
+          <input type="checkbox" id="request-transport" name="request-transport">
+          Quero simular uma solicitação de transporte
+        </label>
+
+        <div id="transport-fields" hidden>
+          <div class="demo-field">
+            <label for="transport-date">Data da consulta</label>
+            <select id="transport-date" name="transport-date" aria-describedby="transport-date-error">
+              <option value="2026-03-07">07/03/2026 — exemplo fictício</option>
+              <option value="2026-03-08">08/03/2026 — exemplo fictício</option>
+              <option value="2026-03-09">09/03/2026 — exemplo fictício</option>
+              <option value="2026-03-10">10/03/2026 — exemplo fictício</option>
+              <option value="2026-03-11">11/03/2026 — exemplo fictício</option>
+              <option value="2026-03-12">12/03/2026 — exemplo fictício</option>
+              <option value="2026-03-13">13/03/2026 — exemplo fictício</option>
+              <option value="2026-03-14">14/03/2026 — exemplo fictício</option>
+            </select>
+            <p class="field-error" id="transport-date-error" hidden>Selecione uma data da demonstração.</p>
+          </div>
+          <div class="demo-field">
+            <label for="transport-pickup">Localidade ou ponto de embarque</label>
+            <input type="text" id="transport-pickup" name="transport-pickup" placeholder="Ex.: comunidade ou ponto de referência" aria-describedby="transport-pickup-error">
+            <p class="field-error" id="transport-pickup-error" hidden>Informe uma localidade ou ponto de embarque para a demonstração.</p>
+          </div>
+          <label class="demo-checkbox" for="transport-rural">
+            <input type="checkbox" id="transport-rural" name="transport-rural">
+            Minha residência fica em área rural
+          </label>
+          <div class="demo-field" id="rural-community-field" hidden>
+            <label for="rural-community">Localidade ou comunidade rural</label>
+            <input type="text" id="rural-community" name="rural-community" placeholder="Picada 48 (exemplo fictício)" aria-describedby="rural-community-error">
+            <p class="field-error" id="rural-community-error" hidden>Informe a comunidade rural para esta demonstração.</p>
+          </div>
+          <div class="demo-field">
+            <label for="transport-passengers">Quantidade de passageiros, incluindo você</label>
+            <input type="number" id="transport-passengers" name="transport-passengers" min="1" max="8" step="1" value="1" inputmode="numeric" aria-describedby="transport-passengers-error">
+            <p class="field-error" id="transport-passengers-error" hidden>Informe de 1 a 8 passageiros, incluindo você.</p>
+          </div>
+          <p class="demo-copy">Capacidade e ocupação são números fictícios usados apenas para esta demonstração.</p>
+          <div id="transport-availability" class="demo-result" role="status" aria-live="polite"></div>
+          <button class="btn-secondary" type="button" id="remove-transport" hidden>Remover transporte e continuar com a consulta</button>
+        </div>
+      </fieldset>
+
+      <p id="vaga-demo-result" class="demo-result" role="status" aria-live="polite"></p>
+      <div class="demo-actions">
+        <button class="btn btn-solid-green" type="submit">Enviar solicitação demonstrativa</button>
+        <button class="btn-secondary" type="button" id="cancel-vaga-dialog">Cancelar</button>
+      </div>
+    </form>
+  </dialog>
 
 </main>
 
@@ -246,6 +314,7 @@
           <li><a href="ajuda.html">Ajuda / Perguntas Frequentes</a></li>
           <li><a href="ajuda.html#idosos">Guia para Idosos</a></li>
           <li><a href="ajuda.html#privacidade">Privacidade e Dados</a></li>
+          <li><a href="demonstracoes.html">Demonstrações do protótipo</a></li>
         </ul>
       </div>
       <div class="footer-col">
