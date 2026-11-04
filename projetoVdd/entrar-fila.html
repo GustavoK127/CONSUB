@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Entrar na Fila de Espera — ConSub</title>
-<meta name="description" content="Cadastre-se na fila de espera do ConSub e seja avisado quando uma consulta vagar.">
+<title>Entrar na fila — ConSub</title>
+<meta name="description" content="Registre uma inscrição na fila do ConSub por especialidade e localidade.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
@@ -29,7 +29,8 @@
     </nav>
     <div class="header-actions">
       <button class="nav-toggle" aria-label="Abrir menu"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
-      <a href="entrar-fila.html" class="btn btn-white"><span class="btn-text-desktop">Cadastrar-se</span></a>
+      <a href="entrar-fila.html" class="btn btn-white"><span class="btn-text-desktop">Entrar na fila</span></a>
+      <button type="button" class="btn btn-white" data-logout>Sair</button>
     </div>
   </div>
 </header>
@@ -38,7 +39,7 @@
 
   <section class="page-hero">
     <h1>Entrar na Fila de Espera</h1>
-    <p>Preencha o formulário abaixo para ser avisado quando uma consulta vagar na sua especialidade.</p>
+    <p>Preencha os dados de cadastro e informe a especialidade e a localidade da inscrição.</p>
   </section>
 
   <section class="section">
@@ -46,7 +47,7 @@
 
       <div class="help-box">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
-        <div><strong>Precisa de ajuda?</strong> Se tiver dificuldade para preencher, ligue para <strong>0800 123 4567</strong> (gratuito, todos os dias das 7h às 22h) e um atendente irá te ajudar.</div>
+        <div><strong>Antes de enviar:</strong> confira os dados, a especialidade e a localidade selecionada.</div>
       </div>
 
       <form id="queue-form" novalidate>
@@ -86,7 +87,7 @@
             <div class="form-group">
               <label for="telefone-familiar">Telefone de familiar ou responsável <span class="opt">(opcional)</span></label>
               <input type="tel" id="telefone-familiar" name="telefone-familiar" placeholder="(00) 00000-0000">
-              <p class="form-hint">Recomendado para idosos. Caso você não responda, entraremos em contato com esse número.</p>
+              <p class="form-hint">Campo opcional para associar outro contato ao cadastro.</p>
             </div>
           </div>
         </div>
@@ -97,18 +98,8 @@
           <div class="form-card-body">
             <div class="form-group">
               <label for="especialidade">Especialidade médica necessária <span class="req">*</span></label>
-              <select id="especialidade" name="especialidade" required>
-                <option value="" selected disabled>Selecione a especialidade</option>
-                <option>Cardiologia</option>
-                <option>Ortopedia</option>
-                <option>Neurologia</option>
-                <option>Ginecologia</option>
-                <option>Dermatologia</option>
-                <option>Psicologia</option>
-                <option>Oftalmologia</option>
-                <option>Endocrinologia</option>
-                <option>Clínico Geral</option>
-                <option>Outra</option>
+              <select id="especialidade" name="especialidade" required disabled>
+                <option value="" selected disabled>Carregando especialidades…</option>
               </select>
             </div>
             <div class="form-group">
@@ -145,32 +136,32 @@
             <div class="form-row">
               <div class="form-group">
                 <label for="estado">Estado <span class="req">*</span></label>
-                <select id="estado" name="estado" required>
-                  <option value="" selected disabled>Selecione o estado</option>
-                  <option>AC</option><option>AL</option><option>AP</option><option>AM</option><option>BA</option>
-                  <option>CE</option><option>DF</option><option>ES</option><option>GO</option><option>MA</option>
-                  <option>MT</option><option>MS</option><option>MG</option><option>PA</option><option>PB</option>
-                  <option>PR</option><option>PE</option><option>PI</option><option>RJ</option><option>RN</option>
-                  <option>RS</option><option>RO</option><option>RR</option><option>SC</option><option>SP</option>
-                  <option>SE</option><option>TO</option>
+                <select id="estado" name="estado" required disabled>
+                  <option value="" selected disabled>Carregando estados…</option>
                 </select>
               </div>
               <div class="form-group">
                 <label for="cidade">Cidade <span class="req">*</span></label>
-                <input type="text" id="cidade" name="cidade" placeholder="Nome da sua cidade" required>
+                <select id="cidade" name="cidade" required disabled>
+                  <option value="" selected disabled>Selecione primeiro o estado</option>
+                </select>
               </div>
             </div>
             <div class="form-group">
               <label for="ubs">Unidade Básica de Saúde (UBS) de referência <span class="opt">(opcional)</span></label>
-              <input type="text" id="ubs" name="ubs" placeholder="Nome ou endereço da sua UBS">
+              <select id="ubs" name="ubs" disabled>
+                <option value="" selected>Selecione uma UBS de referência (opcional)</option>
+              </select>
             </div>
           </div>
         </div>
 
         <div class="consent-box">
           <input type="checkbox" id="consent" name="consent" required>
-          <label for="consent">Concordo que meus dados sejam utilizados exclusivamente para fins de agendamento de consultas no SUS pelo sistema ConSub. Os dados são protegidos conforme a LGPD (Lei Geral de Proteção de Dados). Não compartilhamos suas informações com terceiros.</label>
+          <label for="consent">Confirmo que as informações foram fornecidas para registrar este cadastro na fila.</label>
         </div>
+
+        <p id="queue-form-result" class="form-result" role="status" aria-live="polite"></p>
 
         <button type="submit" class="btn btn-solid-green">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg>
@@ -179,7 +170,7 @@
 
         <p class="form-footnote">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-          Seus dados são protegidos pela LGPD. Em caso de dúvidas, ligue 0800 123 4567.
+          Revise as informações antes de confirmar o cadastro.
         </p>
 
       </form>
@@ -197,7 +188,7 @@
           <span class="brand-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-6.7-4.35-9.3-8.2C.86 9.94 1.6 6.4 4.6 5.03 6.9 3.98 9.5 4.7 11 6.6 12.5 4.7 15.1 3.98 17.4 5.03c3 1.37 3.74 4.9 1.9 7.77C18.7 16.65 12 21 12 21z"/></svg></span>
           ConSub
         </a>
-        <p>Substituição inteligente de consultas vagas no SUS, para que nenhuma vaga seja desperdiçada.</p>
+        <p>Organize cadastros e solicitações de consultas em uma única interface.</p>
       </div>
       <div class="footer-col">
         <h4>Navegação</h4>
@@ -214,25 +205,19 @@
           <li><a href="ajuda.html">Ajuda / Perguntas Frequentes</a></li>
           <li><a href="ajuda.html#idosos">Guia para Idosos</a></li>
           <li><a href="ajuda.html#privacidade">Privacidade e Dados</a></li>
-          <li><a href="demonstracoes.html">Demonstrações do protótipo</a></li>
+          <li><a href="demonstracoes.html">Fluxos de atendimento</a></li>
         </ul>
       </div>
-      <div class="footer-col">
-        <h4>Contato</h4>
-        <ul>
-          <li class="contact-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span>0800 123 4567</span></li>
-          <li class="contact-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 6l-10 7L2 6"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg><span>contato@consub.gov.br</span></li>
-          <li class="contact-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Serviço integrado ao SUS — Brasil</span></li>
-        </ul>
-      </div>
+
     </div>
     <div class="footer-bottom">
-      <span>© 2026 ConSub. Projeto de interesse público vinculado ao SUS.</span>
-      <span>Desenvolvido para melhorar o acesso à saúde no Brasil.</span>
+      <span>© 2026 ConSub. ConSub</span>
+      <span>Consultas, inscrições e solicitações em um só lugar.</span>
     </div>
   </div>
 </footer>
 
-<script src="script.js"></script>
+<script type="module" src="script.js"></script>
+<script type="module" src="supabase-app.js"></script>
 </body>
 </html>

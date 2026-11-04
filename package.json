@@ -1,0 +1,19 @@
+{
+  "name": "consub-prototipo",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --config vite.config.js",
+    "build": "vite build --config vite.config.js",
+    "preview": "vite preview --config vite.config.js",
+    "supabase": "supabase"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "2.109.0"
+  },
+  "devDependencies": {
+    "supabase": "2.122.0",
+    "vite": "6.4.5"
+  }
+}

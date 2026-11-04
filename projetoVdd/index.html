@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ConSub — Nenhuma consulta do SUS precisa ficar vaga</title>
-<meta name="description" content="O ConSub conecta pacientes em fila de espera com consultas do SUS que seriam perdidas por faltas, garantindo atendimento mais rápido.">
+<title>ConSub — Organização de consultas e filas</title>
+<meta name="description" content="Organize inscrições em fila, consulte horários disponíveis e registre pedidos de consulta no ConSub.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
@@ -29,7 +29,7 @@
     </nav>
     <div class="header-actions">
       <button class="nav-toggle" aria-label="Abrir menu"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
-      <a href="entrar-fila.html" class="btn btn-white"><span class="btn-text-desktop">Cadastrar-se</span></a>
+      <a href="entrar-fila.html" class="btn btn-white"><span class="btn-text-desktop">Entrar na fila</span></a>
     </div>
   </div>
 </header>
@@ -39,9 +39,9 @@
   <section class="hero">
     <div class="container">
       <div class="hero-copy">
-        <span class="badge"><span class="dot"></span>Sistema integrado ao SUS</span>
-        <h1>Nenhuma consulta do SUS precisa ficar <span class="accent">vaga</span></h1>
-        <p class="lead">O <strong>ConSub</strong> conecta pacientes em fila de espera com consultas que seriam perdidas por faltas, garantindo que você seja atendido mais rápido e que o SUS funcione melhor para todos.</p>
+        <span class="badge"><span class="dot"></span>Consultas por especialidade e localidade</span>
+        <h1>Mais organização para consultas e filas de <span class="accent">espera</span></h1>
+        <p class="lead">O <strong>ConSub</strong> reúne inscrições em fila, horários disponíveis e pedidos de consulta em uma única interface.</p>
         <div class="hero-actions">
           <a href="entrar-fila.html" class="btn btn-white">
             Entrar na Fila de Espera
@@ -60,8 +60,8 @@
           <div class="status-toast">
             <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg></span>
             <div>
-              <strong>Consulta disponível!</strong>
-              <span>Cardiologia — amanhã às 14h30</span>
+              <strong>Catálogo de consultas</strong>
+              <span>Especialidade · data · horário</span>
             </div>
           </div>
         </div>
@@ -72,20 +72,20 @@
   <section class="section">
     <div class="container">
       <h2 class="section-title">Como o ConSub funciona</h2>
-      <p class="section-subtitle">Três passos entre você e uma consulta que, sem o ConSub, seria simplesmente perdida.</p>
+      <p class="section-subtitle">Acesse os dados, consulte horários e registre solicitações em poucos passos.</p>
 
       <div class="priority-grid" style="grid-template-columns:repeat(3,1fr);max-width:980px;margin:0 auto;">
         <div class="priority-card" style="background:var(--mint-100);">
           <strong style="color:var(--green-800);">1. Faça seu cadastro</strong>
-          <span>Informe sua especialidade, cidade e telefone de contato — pelo site, por ligação ou na UBS.</span>
+          <span>Informe dados de cadastro, especialidade e localidade no formulário.</span>
         </div>
         <div class="priority-card blue">
-          <strong>2. Receba o aviso</strong>
-          <span>Quando uma consulta é cancelada, você é avisado por SMS ou ligação, na ordem de prioridade.</span>
+          <strong>2. Consulte os horários</strong>
+          <span>Use os filtros para encontrar consultas por especialidade e cidade.</span>
         </div>
         <div class="priority-card purple">
-          <strong>3. Confirme e compareça</strong>
-          <span>Confirme em até 2 horas e vá até a unidade de saúde com seus documentos.</span>
+          <strong>3. Registre um pedido</strong>
+          <span>Escolha um horário e registre seu pedido de consulta ou transporte.</span>
         </div>
       </div>
     </div>
@@ -95,8 +95,8 @@
     <div class="container">
       <div class="not-found-box" style="background:linear-gradient(120deg, var(--green-800), var(--green-600)); border:none;">
         <div>
-          <h3 style="color:#fff;">Pronto para não perder mais nenhuma vaga?</h3>
-          <p style="color:var(--text-on-green-muted);">Cadastre-se gratuitamente e seja avisado assim que uma consulta compatível surgir.</p>
+          <h3 style="color:#fff;">Organize inscrições e solicitações</h3>
+          <p style="color:var(--text-on-green-muted);">Acesse o formulário para registrar uma inscrição na fila.</p>
         </div>
         <a href="entrar-fila.html" class="btn btn-white">
           Entrar na Fila de Espera
@@ -116,7 +116,7 @@
           <span class="brand-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-6.7-4.35-9.3-8.2C.86 9.94 1.6 6.4 4.6 5.03 6.9 3.98 9.5 4.7 11 6.6 12.5 4.7 15.1 3.98 17.4 5.03c3 1.37 3.74 4.9 1.9 7.77C18.7 16.65 12 21 12 21z"/></svg></span>
           ConSub
         </a>
-        <p>Substituição inteligente de consultas vagas no SUS, para que nenhuma vaga seja desperdiçada.</p>
+        <p>Organize cadastros e solicitações de consultas em uma única interface.</p>
       </div>
       <div class="footer-col">
         <h4>Navegação</h4>
@@ -133,25 +133,18 @@
           <li><a href="ajuda.html">Ajuda / Perguntas Frequentes</a></li>
           <li><a href="ajuda.html#idosos">Guia para Idosos</a></li>
           <li><a href="ajuda.html#privacidade">Privacidade e Dados</a></li>
-          <li><a href="demonstracoes.html">Demonstrações do protótipo</a></li>
+          <li><a href="demonstracoes.html">Fluxos de atendimento</a></li>
         </ul>
       </div>
-      <div class="footer-col">
-        <h4>Contato</h4>
-        <ul>
-          <li class="contact-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span>0800 123 4567</span></li>
-          <li class="contact-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 6l-10 7L2 6"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg><span>contato@consub.gov.br</span></li>
-          <li class="contact-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Serviço integrado ao SUS — Brasil</span></li>
-        </ul>
-      </div>
+
     </div>
     <div class="footer-bottom">
-      <span>© 2026 ConSub. Projeto de interesse público vinculado ao SUS.</span>
-      <span>Desenvolvido para melhorar o acesso à saúde no Brasil.</span>
+      <span>© 2026 ConSub. ConSub</span>
+      <span>Consultas, inscrições e solicitações em um só lugar.</span>
     </div>
   </div>
 </footer>
 
-<script src="script.js"></script>
+<script type="module" src="script.js"></script>
 </body>
 </html>

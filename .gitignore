@@ -1,0 +1,6 @@
+node_modules/
+dist/
+projetoVdd/dist/
+.env.local
+.env.*.local
+supabase/.temp/

@@ -2,19 +2,8 @@
 // ConSub — interações compartilhadas
 // =========================================================
 
-const DEMO_VAN_CAPACITY = Object.freeze({
-  '2026-03-07': { capacity: 8, occupied: 5 },
-  '2026-03-08': { capacity: 8, occupied: 7 },
-  '2026-03-09': { capacity: 8, occupied: 8 },
-  '2026-03-10': { capacity: 8, occupied: 4 },
-  '2026-03-11': { capacity: 8, occupied: 6 },
-  '2026-03-12': { capacity: 8, occupied: 8 },
-  '2026-03-13': { capacity: 8, occupied: 2 },
-  '2026-03-14': { capacity: 8, occupied: 8 }
-});
-
 function calculateVanAvailability(date, passengerCount) {
-  const sample = DEMO_VAN_CAPACITY[date];
+  const sample = window.ConSubTransportCapacity?.[date];
   const passengers = Number(passengerCount);
   if (!sample || !Number.isInteger(passengers) || passengers < 1) {
     return { knownDate: Boolean(sample), validPassengerCount: false, enoughSeats: false };
@@ -122,10 +111,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const searchInput = document.getElementById('consulta-search');
   const specialtyFilter = document.getElementById('filter-specialty');
   const cityFilter = document.getElementById('filter-city');
-  const consultaCards = document.querySelectorAll('.consulta-card');
   const emptyState = document.getElementById('consultas-empty');
 
   function applyConsultaFilters() {
+    const consultaCards = document.querySelectorAll('.consulta-card');
     if (!consultaCards.length) return;
     const term = (searchInput?.value || '').trim().toLowerCase();
     const specialty = specialtyFilter?.value || 'todas';
@@ -192,29 +181,29 @@ document.addEventListener('DOMContentLoaded', () => {
     if (ruralCommunity) ruralCommunity.required = requestTransport.checked && Boolean(transportRural?.checked);
     if (ruralCommunityField) ruralCommunityField.hidden = !requestTransport.checked || !transportRural?.checked;
     if (!requestTransport.checked) {
-      if (transportAvailability) setDemoMessage(transportAvailability, 'O transporte é opcional. A solicitação demonstrativa da consulta pode continuar sem ele.');
+      if (transportAvailability) setDemoMessage(transportAvailability, 'O transporte é opcional. Você pode continuar sem solicitá-lo.');
       if (removeTransport) removeTransport.hidden = true;
       return;
     }
 
     const result = calculateVanAvailability(transportDate?.value, transportPassengers?.value);
     if (!result.validPassengerCount) {
-      setDemoMessage(transportAvailability, 'Informe uma quantidade inteira de passageiros maior que zero para consultar os dados fictícios.', 'warning');
+      setDemoMessage(transportAvailability, 'Informe uma quantidade inteira de passageiros maior que zero.', 'warning');
       if (removeTransport) removeTransport.hidden = true;
       return;
     }
     if (!result.knownDate) {
-      setDemoMessage(transportAvailability, 'Não há ocupação fictícia cadastrada para esta data. Escolha uma das datas de exemplo.', 'warning');
+      setDemoMessage(transportAvailability, 'Não há capacidade cadastrada para esta data. Escolha outra consulta.', 'warning');
       if (removeTransport) removeTransport.hidden = false;
       return;
     }
 
-    const message = `Dados fictícios para ${formatDemoDate(transportDate.value)}: capacidade ${result.capacity}; ocupação simulada ${result.occupied}; assentos restantes ${result.availableSeats}. Passageiros informados: ${result.passengers}. `;
+    const message = `Para ${formatDemoDate(transportDate.value)}: capacidade ${result.capacity}; ocupação ${result.occupied}; assentos disponíveis ${result.availableSeats}. Passageiros informados: ${result.passengers}. `;
     if (result.enoughSeats) {
-      setDemoMessage(transportAvailability, `${message}Há assentos suficientes neste cenário, mas isso não representa reserva ou disponibilidade municipal. `);
+      setDemoMessage(transportAvailability, `${message}A disponibilidade será conferida ao registrar o pedido. `);
       if (removeTransport) removeTransport.hidden = true;
     } else {
-      setDemoMessage(transportAvailability, `${message}Não há assentos suficientes neste cenário. Altere a data ou remova o transporte; a solicitação da consulta não será cancelada.`, 'warning');
+      setDemoMessage(transportAvailability, `${message}Altere a consulta ou remova o transporte para continuar.`, 'warning');
       if (removeTransport) removeTransport.hidden = false;
     }
   }
@@ -248,20 +237,26 @@ document.addEventListener('DOMContentLoaded', () => {
     if (vagaDialog?.open) vagaDialog.close();
   }
 
-  document.querySelectorAll('.btn-vaga').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const card = btn.closest('.consulta-card');
-      if (!card || !vagaDialog || !vagaForm) return;
-      const specialty = card.querySelector('h3')?.textContent.trim() || 'consulta de exemplo';
-      const date = card.dataset.demoDate || '';
-      vagaForm.reset();
-      clearTransportErrors();
-      if (transportDate && [...transportDate.options].some((option) => option.value === date)) transportDate.value = date;
-      if (selectedVagaSummary) selectedVagaSummary.textContent = `${specialty} — data de exemplo ${formatDemoDate(date)}. Nenhuma vaga real será solicitada ou reservada.`;
-      setDemoMessage(vagaDemoResult, '');
-      updateTransportAvailability();
-      vagaDialog.showModal();
-    });
+  document.querySelector('.consultas-grid')?.addEventListener('click', (event) => {
+    const btn = event.target.closest('.btn-vaga');
+    const card = btn?.closest('.consulta-card');
+    if (!card || !vagaDialog || !vagaForm) return;
+    const specialty = card.querySelector('h3')?.textContent.trim() || 'Consulta';
+    const date = card.dataset.demoDate || '';
+    vagaForm.reset();
+    clearTransportErrors();
+    if (transportDate) {
+      transportDate.disabled = false;
+      if ([...transportDate.options].some((option) => option.value === date)) transportDate.value = date;
+      transportDate.disabled = true;
+    }
+    if (selectedVagaSummary) {
+      selectedVagaSummary.textContent = `${specialty} — ${formatDemoDate(date)}`;
+      selectedVagaSummary.dataset.consultaId = card.dataset.consultaId || '';
+    }
+    setDemoMessage(vagaDemoResult, '');
+    updateTransportAvailability();
+    vagaDialog.showModal();
   });
 
   document.getElementById('close-vaga-dialog')?.addEventListener('click', closeVagaDialog);
@@ -274,7 +269,7 @@ document.addEventListener('DOMContentLoaded', () => {
   removeTransport?.addEventListener('click', () => {
     if (requestTransport) requestTransport.checked = false;
     updateTransportAvailability();
-    setDemoMessage(vagaDemoResult, 'Transporte removido da demonstração. A solicitação da consulta continua selecionada e pode seguir sem transporte.');
+    setDemoMessage(vagaDemoResult, 'Transporte removido. Você pode continuar com o pedido de consulta.');
     document.querySelector('#vaga-demo-form button[type="submit"]')?.focus();
   });
 
@@ -282,20 +277,33 @@ document.addEventListener('DOMContentLoaded', () => {
     event.preventDefault();
     if (requestTransport?.checked) {
       if (!validateTransportFields()) {
-        setDemoMessage(vagaDemoResult, 'Revise os campos destacados para continuar com a simulação de transporte.', 'warning');
+        setDemoMessage(vagaDemoResult, 'Revise os campos destacados para continuar com o pedido de transporte.', 'warning');
         return;
       }
       const capacity = calculateVanAvailability(transportDate.value, transportPassengers.value);
       if (!capacity.knownDate || !capacity.enoughSeats) {
         updateTransportAvailability();
-        setDemoMessage(vagaDemoResult, 'A consulta permanece selecionada. Altere a data ou remova o transporte para continuar; nenhuma consulta foi cancelada.', 'warning');
+        setDemoMessage(vagaDemoResult, 'Altere a consulta ou remova o transporte para continuar.', 'warning');
         removeTransport?.focus();
         return;
       }
-      setDemoMessage(vagaDemoResult, 'Solicitação demonstrativa da consulta e do transporte registrada. A consulta não foi reservada e os assentos não foram reservados.');
+      window.dispatchEvent(new CustomEvent('consub:consultation-request', {
+        detail: {
+          consultationId: selectedVagaSummary?.dataset.consultaId,
+          transport: {
+            data: transportDate.value,
+            ponto_embarque: transportPickup.value.trim(),
+            area_rural: Boolean(transportRural?.checked),
+            comunidade_rural: ruralCommunity?.value.trim() || null,
+            passageiros: Number(transportPassengers.value)
+          }
+        }
+      }));
       return;
     }
-    setDemoMessage(vagaDemoResult, 'Solicitação demonstrativa da consulta registrada sem transporte. A vaga não foi reservada.');
+    window.dispatchEvent(new CustomEvent('consub:consultation-request', {
+      detail: { consultationId: selectedVagaSummary?.dataset.consultaId, transport: null }
+    }));
   });
 
   /* ---------- Formulário Entrar na Fila ---------- */
@@ -304,7 +312,7 @@ document.addEventListener('DOMContentLoaded', () => {
     queueForm.addEventListener('submit', (e) => {
       e.preventDefault();
       const requiredFields = queueForm.querySelectorAll('[required]');
-      let valid = true;
+      let valid = queueForm.reportValidity();
       requiredFields.forEach((field) => {
         if (!field.value || (field.type === 'checkbox' && !field.checked)) {
           valid = false;
@@ -314,11 +322,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
       if (!valid) {
-        alert('Por favor, preencha todos os campos obrigatórios (*) e aceite os termos.');
+        const status = document.getElementById('queue-form-result');
+        if (status) {
+          status.textContent = 'Preencha os campos obrigatórios e aceite os termos.';
+          status.classList.remove('is-success');
+          status.classList.add('is-error');
+        }
         return;
       }
-      alert('Cadastro realizado com sucesso! Você foi adicionado à fila de espera do ConSub e será avisado assim que uma vaga compatível surgir.');
-      queueForm.reset();
+      queueForm.dispatchEvent(new CustomEvent('consub:queue-submit', {
+        detail: { formData: new FormData(queueForm) }
+      }));
     });
   }
 
@@ -382,7 +396,7 @@ document.addEventListener('DOMContentLoaded', () => {
       renderDengueQueue();
       document.querySelector(`[data-symptom-code="${record.code}"]`)?.focus();
     });
-    symptomLabel.append(symptomInput, document.createTextNode('Relato fictício de sintomas compatíveis com dengue'));
+    symptomLabel.append(symptomInput, document.createTextNode('Relato de sintomas compatíveis com dengue'));
     item.append(symptomLabel);
     if (record.routineNonUrgent && !record.symptoms) {
       item.append(document.createTextNode(' Consulta de rotina não urgente, sinalizada para revisão somente no cenário ativo.'));
@@ -414,9 +428,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (dengueProtocolActive) {
       const symptomCount = dengueRecords.filter((record) => record.symptoms).length;
-      setDemoMessage(dengueSummary, `Simulação ativa. ${symptomCount} registro(s) com relato de sintomas aparecem primeiro para avaliação profissional; ${routineRecords.length} consulta(s) de rotina foram separadas para revisão ou reagendamento simulado. Nenhum diagnóstico ou reagendamento real foi feito.`);
+      setDemoMessage(dengueSummary, `Protocolo ativo. ${symptomCount} registro(s) com relato de sintomas aparecem primeiro para avaliação; ${routineRecords.length} consulta(s) de rotina foram separadas para revisão.`);
     } else {
-      setDemoMessage(dengueSummary, 'Modo de demonstração desativado. A lista foi restaurada à ordem inicial.');
+      setDemoMessage(dengueSummary, 'A lista foi restaurada à ordem inicial.');
     }
   }
 
@@ -469,13 +483,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const date = formatDemoDate(record.appointmentAt);
     if (record.status === 'falta') {
       if (hasValidPriorCancellation(record)) return `${date} — cancelamento registrado com pelo menos 24 horas; não contado como falta.`;
-      if (record.canceledAt) return `${date} — tentativa de cancelamento com menos de 24 horas; ocorrência neutra nesta demonstração, não contada como falta e interrompe a sequência.`;
-      return `${date} — falta sem cancelamento prévio registrado; considerada nesta regra fictícia.`;
+      if (record.canceledAt) return `${date} — tentativa de cancelamento com menos de 24 horas; não contada como falta e interrompe a sequência.`;
+      return `${date} — falta sem cancelamento prévio registrado.`;
     }
     if (record.status === 'compareceu') return `${date} — comparecimento; interrompe a sequência de faltas.`;
     const hoursBefore = (Date.parse(record.appointmentAt) - Date.parse(record.canceledAt)) / (60 * 60 * 1000);
-    if (hasValidPriorCancellation(record)) return `${date} — cancelamento com ${hoursBefore} horas de antecedência; válido na demonstração e não conta como falta.`;
-    return `${date} — cancelamento com ${hoursBefore} horas de antecedência; tratado como neutro nesta demonstração, não conta como falta e interrompe a sequência.`;
+    if (hasValidPriorCancellation(record)) return `${date} — cancelamento com ${hoursBefore} horas de antecedência; não conta como falta.`;
+    return `${date} — cancelamento com ${hoursBefore} horas de antecedência; não conta como falta e interrompe a sequência.`;
   }
 
   function renderAbsenceScenario() {
@@ -491,12 +505,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (result.blocked) {
       const dates = result.consecutiveAbsences.map((record) => formatDemoDate(record.appointmentAt)).join(' e ');
-      setDemoMessage(absenceResult, `Restrição demonstrativa de 30 dias atingida por duas faltas consecutivas (${dates}). Início: ${formatDemoDate(result.startsOn)}. Término: ${formatDemoDate(result.endsOn)}. O bloqueio vale apenas para este fluxo fictício; não é uma regra oficial nem altera acesso real.`, 'blocked');
+      setDemoMessage(absenceResult, `Resultado do cenário: restrição de 30 dias após duas faltas consecutivas (${dates}). Início: ${formatDemoDate(result.startsOn)}. Término: ${formatDemoDate(result.endsOn)}.`, 'blocked');
       if (advanceBooking) advanceBooking.disabled = true;
       if (inPersonGuidance) inPersonGuidance.hidden = false;
     } else {
       const absenceCount = result.consecutiveAbsences.length;
-      setDemoMessage(absenceResult, `Sem restrição neste cenário. ${absenceCount} falta(s) consecutiva(s) considerada(s); são necessárias duas para acionar a regra ilustrativa. Cancelamentos não viram faltas automaticamente.`);
+      setDemoMessage(absenceResult, `Resultado do cenário: sem restrição. ${absenceCount} falta(s) consecutiva(s) considerada(s); duas são necessárias para atingir o limite. Cancelamentos não viram faltas automaticamente.`);
       if (advanceBooking) advanceBooking.disabled = false;
       if (inPersonGuidance) inPersonGuidance.hidden = true;
     }
@@ -506,7 +520,7 @@ document.addEventListener('DOMContentLoaded', () => {
   absenceScenarioSelect?.addEventListener('change', renderAbsenceScenario);
   advanceBooking?.addEventListener('click', () => {
     if (advanceBooking.disabled) return;
-    setDemoMessage(bookingDemoResult, 'Avanço simulado permitido para este cenário. Nenhum agendamento foi criado.');
+    setDemoMessage(bookingDemoResult, 'Avanço permitido para este cenário.');
   });
   document.getElementById('reset-absence-demo')?.addEventListener('click', () => {
     if (absenceScenarioSelect) absenceScenarioSelect.value = 'sem-bloqueio';

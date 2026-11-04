@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Acesso do operador — ConSub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Pular para o conteúdo</a>
+  <main id="main" class="auth-page">
+    <section class="auth-card" aria-labelledby="auth-title">
+      <a href="index.html" class="brand">
+        <span class="brand-icon" aria-hidden="true">♥</span>
+        ConSub
+      </a>
+      <h1 id="auth-title">Acesso do operador</h1>
+      <p>Entre com a conta autorizada para continuar.</p>
+      <form id="operator-login-form" novalidate>
+        <div class="form-group">
+          <label for="operator-email">E-mail</label>
+          <input id="operator-email" name="email" type="email" autocomplete="username" required>
+        </div>
+        <div class="form-group">
+          <label for="operator-password">Senha</label>
+          <input id="operator-password" name="password" type="password" autocomplete="current-password" required>
+        </div>
+        <p id="operator-login-message" class="auth-message" role="status" aria-live="polite"></p>
+        <button class="btn btn-solid-green" type="submit">Entrar</button>
+      </form>
+      <p class="auth-footnote">O acesso é gerenciado pelo operador do projeto.</p>
+    </section>
+  </main>
+  <script type="module" src="acesso.js"></script>
+</body>
+</html>

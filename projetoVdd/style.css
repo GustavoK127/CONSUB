@@ -668,6 +668,7 @@ h1, h2, h3, h4 {
   gap: 22px;
   padding: 40px 0 10px;
 }
+.consultas-grid[hidden] { display: none; }
 
 .consulta-card {
   background: #fff;
@@ -1353,6 +1354,65 @@ h1, h2, h3, h4 {
 .demo-dialog-head .btn-secondary { flex-shrink: 0; }
 .demo-actions .btn { min-height: 46px; }
 .demo-dialog .demo-notice { margin: 14px 0; }
+
+.form-result:empty,
+.auth-message:empty { display: none; }
+
+.form-result,
+.auth-message {
+  margin: 14px 0;
+  padding: 12px 14px;
+  border: 1px solid #c9dbcf;
+  border-radius: var(--radius-sm);
+  background: #f5faf6;
+  color: var(--green-900);
+  line-height: 1.5;
+}
+
+.form-result.is-error,
+.auth-message.is-error,
+.demo-result.is-error {
+  border-color: #d7a1a1;
+  background: #fff3f3;
+  color: #762727;
+}
+
+.form-result.is-success,
+.auth-message.is-success,
+.demo-result.is-success {
+  border-color: #a6cdb0;
+  background: #f1faf3;
+  color: #1b5c31;
+}
+
+.auth-page {
+  display: grid;
+  min-height: 100vh;
+  place-items: center;
+  padding: 28px 16px;
+  background: var(--mint-50);
+}
+
+.auth-card {
+  width: min(100%, 480px);
+  padding: clamp(24px, 5vw, 42px);
+  border: 1px solid #dce8e0;
+  border-radius: var(--radius-lg);
+  background: #fff;
+  box-shadow: var(--shadow-card);
+}
+
+.auth-card .brand { margin-bottom: 24px; }
+.auth-card h1 { margin-bottom: 8px; color: var(--text-dark); }
+.auth-card > p { color: var(--text-muted); }
+.auth-card form { margin-top: 24px; }
+.auth-card form > .btn { width: 100%; justify-content: center; }
+.auth-footnote { margin: 20px 0 0; font-size: 0.88rem; }
+
+button:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
 
 @media (max-width: 640px) {
   .demo-card-heading,

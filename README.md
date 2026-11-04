@@ -1,27 +1,80 @@
 # ConSub
 
-O ConSub é um protótipo de site para conectar pessoas que aguardam atendimento no SUS a consultas que podem ficar disponíveis após cancelamentos ou faltas. A proposta é reduzir o desperdício de vagas e facilitar o acesso a consultas por especialidade e localidade.
+O ConSub organiza inscrições em fila, consultas disponíveis e pedidos de consulta e transporte em uma única interface.
 
-## Funcionalidades demonstradas
+## Fluxos disponíveis
 
-- Página inicial com apresentação do serviço.
-- Formulário de inscrição em fila, com dados de contato, especialidade médica e localização.
-- Página de consultas disponíveis com busca e filtros por especialidade e cidade.
-- Guia de funcionamento, critérios de prioridade e central de ajuda.
-- Página de demonstrações com reorganização fictícia da triagem, solicitação opcional de transporte e cenários de restrição por faltas.
-- Layout responsivo, com navegação para dispositivos móveis.
+- Inscrição em fila associada a uma pessoa, especialidade e localidade.
+- Consulta ao catálogo de horários, com filtros por especialidade e cidade.
+- Registro de pedido de consulta e, opcionalmente, de transporte.
+- Acesso às áreas conectadas por uma conta autenticada de operador.
+- Cenários de organização da triagem e de faltas executados apenas no navegador.
 
-## Como visualizar
+Os registros pessoais devem ser sintéticos. A aplicação registra solicitações; não confirma agendamentos nem reserva ou reduz vagas e capacidade de transporte.
 
-O projeto é feito com HTML, CSS e JavaScript, sem etapa de instalação ou compilação.
+## Requisitos
 
-1. Clone ou baixe este repositório.
-2. Abra `projetoVdd/index.html` no navegador.
-3. Use o menu para acessar o formulário, as consultas disponíveis, o guia e a ajuda. A página `projetoVdd/demonstracoes.html` reúne os novos fluxos de demonstração.
+- Node.js 20.14 ou superior.
+- npm 10.7 ou superior.
+- Projeto Supabase existente.
 
-Também é possível servir a pasta `projetoVdd` com qualquer servidor HTTP estático.
+## Configuração local
 
-## Estrutura
+Na raiz do repositório:
+
+```powershell
+npm ci
+Copy-Item .env.example .env.local
+```
+
+Edite `.env.local` com a URL do projeto e a chave pública de cliente. A chave `sb_publishable_...` fica no navegador por definição; não use a chave secreta `service_role`. As tabelas pessoais têm RLS e cada linha é vinculada à conta que a criou.
+
+Inicie o site:
+
+```powershell
+npm run dev
+```
+
+Abra http://127.0.0.1:5173. A configuração Vite serve somente em localhost. Para gerar a versão compilada:
+
+```powershell
+npm run build
+npm run preview
+```
+
+## Configuração do Supabase
+
+A migração em `supabase/migrations` cria os catálogos, tabelas pessoais, validações, políticas RLS e duas operações transacionais. O arquivo `supabase/seed.sql` contém catálogos e horários sintéticos futuros. O seed pode ser executado novamente para restaurar os valores de capacidade do cenário.
+
+Para vincular o CLI ao projeto e revisar a migração antes de enviá-la:
+
+```powershell
+npx supabase login
+npx supabase link --project-ref vdcfodzxgbnvreewbehi
+npx supabase db push --dry-run
+```
+
+Após revisar o resultado, aplique a migração e os dados do seed:
+
+```powershell
+npx supabase db push --include-seed
+```
+
+Não use `supabase db reset --linked`: esse comando apaga objetos do banco remoto. Docker não é necessário para enviar uma migração ao projeto hospedado. Ele só é necessário para iniciar a stack Supabase local.
+
+A configuração remota de Auth fica no Dashboard do Supabase e não é alterada por `supabase/config.toml`. Em Authentication → Sign In / Providers, mantenha o provedor Email habilitado, desative “Allow new users to sign up” e mantenha “Allow anonymous sign-ins” desativado. Em Authentication → URL Configuration, use somente `http://127.0.0.1:5173` como Site URL e URL de retorno permitida. Crie uma única conta de operador pelo painel; a aplicação não oferece cadastro de contas.
+
+## Dados e acesso
+
+- Os catálogos de especialidade, cidade, unidade, profissional, consulta e capacidade são lidos por contas autenticadas.
+- `pacientes`, `inscricoes_fila`, `solicitacoes_consulta` e `solicitacoes_transporte` usam RLS por `owner_id = auth.uid()`.
+- O navegador não envia `owner_id`; o banco o associa à sessão autenticada.
+- A inscrição de fila grava paciente e inscrição em uma operação atômica.
+- O pedido de consulta e o pedido opcional de transporte são gravados juntos em uma operação atômica.
+- Pedidos de consulta não criam agendamentos e não alteram o catálogo de vagas nem a capacidade de transporte.
+- Os cenários de dengue e faltas permanecem no navegador e não gravam no banco.
+
+## Estrutura principal
 
 ```text
 .
@@ -29,28 +82,18 @@ Também é possível servir a pasta `projetoVdd` com qualquer servidor HTTP est�
 │   ├── DER-ConSub.dot
 │   ├── DER-ConSub.svg
 │   └── Modelo-ER-ConSub.md
-└── projetoVdd/
-    ├── index.html
-    ├── entrar-fila.html
-    ├── consultas.html
-    ├── demonstracoes.html
-    ├── como-funciona.html
-    ├── ajuda.html
-    ├── style.css
-    ├── script.js
-    └── bandeiraBrasil.webp
+├── projetoVdd/
+│   ├── acesso.html
+│   ├── consultas.html
+│   ├── entrar-fila.html
+│   ├── supabase-app.js
+│   └── supabase-client.js
+└── supabase/
+    ├── config.toml
+    ├── migrations/
+    └── seed.sql
 ```
 
 ## Documentação
 
-O [modelo entidade-relacionamento](docs/Modelo-ER-ConSub.md) descreve uma proposta de dados para inscrições, consultas, vagas, ofertas, notificações e agendamentos.
-
-## Observação
-
-Esta versão demonstra a interface e interações no navegador. Os formulários e ações de solicitação são simulados no front-end; o projeto não possui integração com sistemas do SUS, banco de dados, envio real de SMS ou agendamento efetivo.
-
-A página `projetoVdd/demonstracoes.html` reúne cenários fictícios para reorganização visual da triagem, solicitação opcional de transporte com ocupação estática de van e uma regra ilustrativa de faltas. A indicação de sintomas não é diagnóstico; nenhuma consulta é reagendada, transporte reservado ou pessoa real bloqueada. A regra de faltas não representa política oficial do SUS.
-
-## Licença
-
-Nenhuma licença foi definida para este repositório.
+O [modelo entidade-relacionamento](docs/Modelo-ER-ConSub.md) e o diagrama SVG descrevem as tabelas implementadas e suas relações.
