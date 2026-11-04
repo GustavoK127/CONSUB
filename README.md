@@ -64,6 +64,8 @@ Não use `supabase db reset --linked`: esse comando apaga objetos do banco remot
 
 A configuração remota de Auth fica no Dashboard do Supabase e não é alterada por `supabase/config.toml`. Em Authentication → Sign In / Providers, mantenha o provedor Email habilitado, desative “Allow new users to sign up” e mantenha “Allow anonymous sign-ins” desativado. Em Authentication → URL Configuration, use somente `http://127.0.0.1:5173` como Site URL e URL de retorno permitida. Crie uma única conta de operador pelo painel; a aplicação não oferece cadastro de contas.
 
+Depois de criar essa única conta e aplicar o seed de catálogos, execute `supabase/seed_operator_demo_data.sql` no SQL Editor do Supabase para inserir três pacientes sintéticos e três inscrições na fila vinculadas à conta do operador. O script interrompe a execução se não houver exatamente uma conta Auth e pode ser executado novamente sem duplicar inscrições ativas. Ele não cria contas de login e não usa dados pessoais reais.
+
 ## Dados e acesso
 
 - Os catálogos de especialidade, cidade, unidade, profissional, consulta e capacidade são lidos por contas autenticadas.
@@ -91,7 +93,8 @@ A configuração remota de Auth fica no Dashboard do Supabase e não é alterada
 └── supabase/
     ├── config.toml
     ├── migrations/
-    └── seed.sql
+    ├── seed.sql
+    └── seed_operator_demo_data.sql
 ```
 
 ## Documentação
