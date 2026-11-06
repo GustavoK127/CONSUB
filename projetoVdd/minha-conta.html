@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minha conta — ConSub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Pular para o conteúdo</a>
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="brand"><span class="brand-icon" aria-hidden="true">♥</span>ConSub</a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="minha-conta.html" class="active">Minha conta</a></li>
+          <li><a href="entrar-fila.html">Entrar na fila</a></li>
+          <li><a href="consultas.html">Consultar horários</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <button class="nav-toggle" type="button" aria-label="Abrir menu">☰</button>
+        <button class="btn btn-white" type="button" data-logout>Sair</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="page-hero">
+      <h1>Minha conta</h1>
+      <p>Consulte e atualize seu perfil e acompanhe seus pedidos.</p>
+    </section>
+
+    <section class="section">
+      <div class="container account-layout">
+        <section class="form-card" aria-labelledby="profile-title">
+          <div class="form-card-head" id="profile-title">Meu perfil</div>
+          <div class="form-card-body">
+            <form id="profile-form">
+              <div class="form-group">
+                <label for="profile-name">Nome completo</label>
+                <input id="profile-name" name="nome_completo" autocomplete="name" required minlength="3">
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="profile-cpf">CPF</label>
+                  <input id="profile-cpf" name="cpf" inputmode="numeric" autocomplete="off" required maxlength="14">
+                </div>
+                <div class="form-group">
+                  <label for="profile-birth">Data de nascimento</label>
+                  <input id="profile-birth" name="data_nascimento" type="date" required>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="profile-phone">Telefone</label>
+                  <input id="profile-phone" name="telefone" type="tel" autocomplete="tel" required>
+                </div>
+                <div class="form-group">
+                  <label for="profile-contact-email">E-mail de contato (opcional)</label>
+                  <input id="profile-contact-email" name="email" type="email" autocomplete="email">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="profile-cns">CNS (opcional)</label>
+                  <input id="profile-cns" name="cns" inputmode="numeric">
+                </div>
+                <div class="form-group">
+                  <label for="profile-responsible-phone">Telefone de responsável (opcional)</label>
+                  <input id="profile-responsible-phone" name="telefone_responsavel" type="tel">
+                </div>
+              </div>
+              <p id="profile-result" class="form-result" role="status" aria-live="polite"></p>
+              <button class="btn btn-solid-green" type="submit">Salvar perfil</button>
+            </form>
+          </div>
+        </section>
+
+        <section class="record-section" aria-labelledby="my-queue-title">
+          <div class="section-heading-row">
+            <div>
+              <h2 id="my-queue-title">Minhas inscrições na fila</h2>
+              <p>Acompanhe ou cancele suas próprias inscrições.</p>
+            </div>
+            <a class="btn btn-green-pill" href="entrar-fila.html">Nova inscrição</a>
+          </div>
+          <div id="my-queue-records" class="record-list" aria-live="polite"></div>
+        </section>
+
+        <section class="record-section" aria-labelledby="my-requests-title">
+          <div class="section-heading-row">
+            <div>
+              <h2 id="my-requests-title">Meus pedidos de consulta</h2>
+              <p>O pedido não confirma a consulta nem reserva uma vaga.</p>
+            </div>
+            <a class="btn btn-green-pill" href="consultas.html">Consultar horários</a>
+          </div>
+          <div id="my-consultation-records" class="record-list" aria-live="polite"></div>
+        </section>
+      </div>
+    </section>
+  </main>
+  <script type="module" src="script.js"></script>
+  <script type="module" src="supabase-app.js"></script>
+</body>
+</html>

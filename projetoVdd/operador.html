@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Painel do operador — ConSub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Pular para o conteúdo</a>
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="brand"><span class="brand-icon" aria-hidden="true">♥</span>ConSub</a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#operator-patients">Perfis</a></li>
+          <li><a href="#operator-queue">Inscrições</a></li>
+          <li><a href="#operator-consultations">Pedidos de consulta</a></li>
+          <li><a href="#operator-transport">Transportes</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <button class="nav-toggle" type="button" aria-label="Abrir menu">☰</button>
+        <button class="btn btn-white" type="button" data-logout>Sair</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="page-hero">
+      <h1>Painel do operador</h1>
+      <p>Consulte e administre os registros dos usuários.</p>
+    </section>
+
+    <section class="section">
+      <div class="container operator-layout">
+        <p id="operator-dashboard-status" class="form-result" role="status" aria-live="polite"></p>
+
+        <section id="operator-patients" class="operator-panel">
+          <h2>Perfis de pacientes</h2>
+          <div class="table-scroll"><table class="operator-table">
+            <thead><tr><th>Nome</th><th>CPF</th><th>Nascimento</th><th>Contato</th><th>Conta</th><th>Ações</th></tr></thead>
+            <tbody id="operator-patients-body"></tbody>
+          </table></div>
+        </section>
+
+        <section id="operator-queue" class="operator-panel">
+          <h2>Inscrições na fila</h2>
+          <div class="table-scroll"><table class="operator-table">
+            <thead><tr><th>Paciente</th><th>Especialidade</th><th>Local</th><th>Urgência</th><th>Status</th><th>Descrição</th><th>Ações</th></tr></thead>
+            <tbody id="operator-queue-body"></tbody>
+          </table></div>
+        </section>
+
+        <section id="operator-consultations" class="operator-panel">
+          <h2>Pedidos de consulta</h2>
+          <div class="table-scroll"><table class="operator-table">
+            <thead><tr><th>Conta</th><th>Especialidade</th><th>Data e horário</th><th>Unidade</th><th>Status</th><th>Ações</th></tr></thead>
+            <tbody id="operator-consultations-body"></tbody>
+          </table></div>
+        </section>
+
+        <section id="operator-transport" class="operator-panel">
+          <h2>Pedidos de transporte</h2>
+          <div class="table-scroll"><table class="operator-table">
+            <thead><tr><th>Conta</th><th>Data</th><th>Embarque</th><th>Passageiros</th><th>Área rural</th><th>Ações</th></tr></thead>
+            <tbody id="operator-transport-body"></tbody>
+          </table></div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <dialog class="edit-dialog" id="operator-edit-dialog" aria-labelledby="operator-edit-title">
+    <form id="operator-edit-form" method="dialog">
+      <div class="demo-dialog-head">
+        <div><p class="eyebrow">Administração</p><h2 id="operator-edit-title">Editar registro</h2></div>
+        <button class="btn-secondary" type="button" id="operator-edit-close">Fechar</button>
+      </div>
+      <div id="operator-edit-fields" class="operator-edit-fields"></div>
+      <p id="operator-edit-result" class="form-result" role="status" aria-live="polite"></p>
+      <div class="demo-actions">
+        <button class="btn btn-solid-green" type="submit">Salvar alterações</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script type="module" src="supabase-app.js"></script>
+</body>
+</html>

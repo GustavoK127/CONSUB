@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Acesso do usuário — ConSub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Pular para o conteúdo</a>
+  <main id="main" class="auth-page">
+    <section class="auth-card" aria-labelledby="auth-title">
+      <a href="index.html" class="brand"><span class="brand-icon" aria-hidden="true">♥</span>ConSub</a>
+      <h1 id="auth-title">Acesso do usuário</h1>
+      <p id="auth-intro">Entre para consultar seu perfil e seus pedidos.</p>
+
+      <div class="auth-switch" role="group" aria-label="Escolha entrar ou criar uma conta">
+        <button type="button" class="btn-secondary is-active" data-auth-view="login" aria-pressed="true">Entrar</button>
+        <button type="button" class="btn-secondary" data-auth-view="signup" aria-pressed="false">Criar conta</button>
+      </div>
+
+      <p id="user-auth-message" class="auth-message" role="status" aria-live="polite"></p>
+
+      <form id="user-login-form">
+        <div class="form-group">
+          <label for="user-login-email">E-mail</label>
+          <input id="user-login-email" name="email" type="email" autocomplete="username" required>
+        </div>
+        <div class="form-group">
+          <label for="user-login-password">Senha</label>
+          <input id="user-login-password" name="password" type="password" autocomplete="current-password" required>
+        </div>
+        <button class="btn btn-solid-green" type="submit">Entrar</button>
+      </form>
+
+      <form id="user-signup-form" hidden>
+        <div class="form-group">
+          <label for="user-signup-email">E-mail</label>
+          <input id="user-signup-email" name="email" type="email" autocomplete="email" required>
+        </div>
+        <div class="form-group">
+          <label for="user-signup-password">Crie uma senha</label>
+          <input id="user-signup-password" name="password" type="password" minlength="8" autocomplete="new-password" required>
+        </div>
+        <div class="form-group">
+          <label for="user-signup-confirm">Confirme a senha</label>
+          <input id="user-signup-confirm" name="password_confirmation" type="password" minlength="8" autocomplete="new-password" required>
+        </div>
+        <button class="btn btn-solid-green" type="submit">Criar conta</button>
+        <p class="form-footnote">Após o cadastro, confirme seu e-mail para entrar. Depois, complete seu perfil.</p>
+      </form>
+
+      <p class="auth-footnote"><a href="acesso.html">Acesso do operador</a></p>
+    </section>
+  </main>
+  <script type="module" src="conta.js"></script>
+</body>
+</html>

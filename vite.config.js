@@ -21,6 +21,9 @@ export default defineConfig({
       input: {
         index: resolve(process.cwd(), 'projetoVdd/index.html'),
         acesso: resolve(process.cwd(), 'projetoVdd/acesso.html'),
+        conta: resolve(process.cwd(), 'projetoVdd/conta.html'),
+        minhaConta: resolve(process.cwd(), 'projetoVdd/minha-conta.html'),
+        operador: resolve(process.cwd(), 'projetoVdd/operador.html'),
         ajuda: resolve(process.cwd(), 'projetoVdd/ajuda.html'),
         comoFunciona: resolve(process.cwd(), 'projetoVdd/como-funciona.html'),
         consultas: resolve(process.cwd(), 'projetoVdd/consultas.html'),

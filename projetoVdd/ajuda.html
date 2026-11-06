@@ -29,6 +29,7 @@
     </nav>
     <div class="header-actions">
       <button class="nav-toggle" aria-label="Abrir menu"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+      <a href="conta.html" class="btn btn-white">Acesso do usuário</a>
       <a href="acesso.html" class="btn btn-white">Acesso do operador</a>
     </div>
   </div>
@@ -95,12 +96,12 @@
           <span class="icon" aria-hidden="true">●</span>
           <div>
             <h3>Acesso aos registros</h3>
-            <p>As áreas de cadastro e consulta conectadas ao banco exigem autenticação do operador.</p>
+            <p>As áreas de cadastro e consulta exigem autenticação. Cada usuário acompanha os próprios registros, e o operador administra os registros no painel restrito.</p>
           </div>
         </div>
         <ul class="privacy-checks">
           <li>Os registros pessoais são associados à conta autenticada que os criou.</li>
-          <li>As políticas de acesso limitam cada conta aos próprios registros.</li>
+          <li>As políticas de acesso limitam cada usuário aos próprios registros; o operador autorizado pode administrar os registros de todos os usuários.</li>
           <li>O catálogo de consultas e os filtros exigem uma sessão autenticada.</li>
           <li>Revise as informações antes de registrar uma solicitação.</li>
         </ul>
@@ -127,7 +128,7 @@
         </div>
         <div class="faq-item" data-category="geral">
           <button class="faq-question">Como acessar as áreas conectadas ao banco? <span aria-hidden="true">⌄</span></button>
-          <div class="faq-answer"><p>Use o acesso do operador com e-mail e senha autorizados para abrir o formulário de inscrição e a lista de consultas.</p></div>
+          <div class="faq-answer"><p>Crie uma conta de usuário ou entre com uma conta existente. A área do operador usa um acesso separado.</p></div>
         </div>
         <div class="faq-item" data-category="cadastro">
           <button class="faq-question">Quais informações o formulário solicita? <span aria-hidden="true">⌄</span></button>
@@ -147,7 +148,7 @@
         </div>
         <div class="faq-item" data-category="privacidade">
           <button class="faq-question">Quem pode consultar os registros pessoais? <span aria-hidden="true">⌄</span></button>
-          <div class="faq-answer"><p>A conta autenticada que criou os registros pode consultá-los. As políticas RLS associam cada registro ao identificador da sessão.</p></div>
+          <div class="faq-answer"><p>Usuários consultam apenas os próprios registros. O operador autorizado pode consultar e administrar registros de qualquer usuário. As permissões são verificadas pelo banco de dados.</p></div>
         </div>
         <div class="faq-item" data-category="idosos">
           <button class="faq-question">Posso pedir ajuda para preencher o cadastro? <span aria-hidden="true">⌄</span></button>
@@ -176,7 +177,7 @@
       </div>
       <div class="footer-col">
         <h4>Acesso</h4>
-        <ul><li><a href="acesso.html">Acesso do operador</a></li></ul>
+        <ul><li><a href="conta.html">Acesso do usuário</a></li><li><a href="acesso.html">Acesso do operador</a></li></ul>
       </div>
     </div>
     <div class="footer-bottom"><span>© 2026 ConSub</span><span>Consultas, inscrições e solicitações em um só lugar.</span></div>
