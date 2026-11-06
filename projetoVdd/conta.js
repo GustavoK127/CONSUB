@@ -7,6 +7,8 @@ const title = document.getElementById('auth-title');
 const intro = document.getElementById('auth-intro');
 const loginButton = document.querySelector('[data-auth-view="login"]');
 const signupButton = document.querySelector('[data-auth-view="signup"]');
+const resendButton = document.getElementById('resend-confirmation');
+const confirmationUrl = new URL('conta.html', window.location.href).toString();
 
 function showMessage(text, tone = '') {
   if (!message) return;
@@ -44,6 +46,7 @@ function messageForAuthError(error) {
     return 'O limite de e-mails de confirmação foi atingido. Aguarde antes de tentar novamente.';
   }
   if (error?.code === 'weak_password') return 'Escolha uma senha mais forte.';
+  if (error?.code === 'email_not_confirmed') return 'Confirme seu e-mail antes de entrar.';
   if (error?.code === 'user_already_exists' || error?.code === 'email_exists') {
     return 'Não foi possível criar a conta com esse e-mail. Tente entrar ou use outro endereço.';
   }
@@ -54,6 +57,10 @@ async function routeSignedInUser() {
   const { data: role, error } = await supabaseClient.rpc('meu_papel');
   if (error || !role) {
     showMessage('Sua conta ainda não está habilitada. Fale com o responsável pelo projeto.', 'error');
+    return;
+  }
+  if (!['user', 'operator'].includes(role)) {
+    showMessage('Esta conta não tem um perfil de acesso válido.', 'error');
     return;
   }
   window.location.replace(role === 'operator' ? 'operador.html' : safeNextPath());
@@ -67,11 +74,13 @@ if (!supabaseConfigured || !supabaseClient) {
   [loginForm, signupForm].forEach((form) => {
     if (form) form.querySelector('button[type="submit"]').disabled = true;
   });
+  if (resendButton) resendButton.disabled = true;
 } else {
-  const params = new URLSearchParams(window.location.search);
-  if (params.has('verified')) {
-    setView('login');
-    showMessage('E-mail confirmado. Entre com seu e-mail e senha.', 'success');
+  const callbackParams = new URLSearchParams(window.location.hash.slice(1));
+  const queryParams = new URLSearchParams(window.location.search);
+  if (callbackParams.has('error') || queryParams.has('error')) {
+    showMessage('O link de confirmação é inválido ou expirou. Tente entrar ou solicite uma nova confirmação.', 'error');
+    window.history.replaceState(null, '', window.location.pathname);
   }
 
   supabaseClient.auth.getSession().then(({ data }) => {
@@ -95,6 +104,26 @@ if (!supabaseConfigured || !supabaseClient) {
       return;
     }
     await routeSignedInUser();
+    submit.disabled = false;
+  });
+
+  resendButton?.addEventListener('click', async () => {
+    const emailField = loginForm.elements.namedItem('email');
+    if (!emailField.reportValidity()) return;
+    resendButton.disabled = true;
+    showMessage('Solicitando uma nova confirmação…');
+    try {
+      const { error } = await supabaseClient.auth.resend({
+        type: 'signup',
+        email: emailField.value.trim(),
+        options: { emailRedirectTo: confirmationUrl }
+      });
+      showMessage(error ? messageForAuthError(error) : 'Se houver um cadastro pendente para este endereço, confira o novo e-mail de confirmação.', error ? 'error' : 'success');
+    } catch {
+      showMessage('Não foi possível solicitar o e-mail. Confira sua conexão e tente novamente.', 'error');
+    } finally {
+      resendButton.disabled = false;
+    }
   });
 
   signupForm?.addEventListener('submit', async (event) => {
@@ -111,7 +140,6 @@ if (!supabaseConfigured || !supabaseClient) {
     const submit = signupForm.querySelector('button[type="submit"]');
     submit.disabled = true;
     showMessage('Criando sua conta…');
-    const confirmationUrl = new URL('conta.html?verified=1', window.location.href).toString();
     const { data, error } = await supabaseClient.auth.signUp({
       email: String(formData.get('email') || '').trim(),
       password,
