@@ -38,7 +38,7 @@ function safeNextPath() {
 
 function messageForAuthError(error) {
   if (error?.code === 'email_address_not_authorized') {
-    return 'Para este protótipo, use um e-mail cadastrado como membro da equipe do projeto Supabase.';
+    return 'O serviço de e-mail atual só permite endereços associados a membros da equipe do projeto Supabase.';
   }
   if (error?.code === 'over_email_send_rate_limit' || error?.status === 429) {
     return 'O limite de e-mails de confirmação foi atingido. Aguarde antes de tentar novamente.';
